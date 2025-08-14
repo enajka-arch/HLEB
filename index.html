@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>🥖 Дрожжевое — трекер</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#111827" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <!-- Tailwind via CDN (kept simple for prototype) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- React + ReactDOM + Babel (for in-browser JSX) -->
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    html, body, #root { height: 100%; }
+    body { margin: 0; background: #fff; }
+    /* light/dark auto based on OS */
+    @media (prefers-color-scheme: dark) {
+      body { background: #000; }
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel" data-presets="react">
+    // Register service worker
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js');
+      });
+    }
+  </script>
+  <script type="text/babel" data-presets="react" src="app.jsx"></script>
+</body>
+</html>
